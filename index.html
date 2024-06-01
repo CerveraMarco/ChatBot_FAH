@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado para el chat -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+            <div class="d-flex  align-items-center justify-content-evenly">
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0">
+                    <li><a href="#" class="nav-link px-2 textochat">ChatFAH.V2</a></li>
+                </ul>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none"aria-expanded="false">
+                        <img src="img/shin-hati-ahsoka-97.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="chat">
+        <div id="chatbox">
+            <div id="chatlogs" class="bloquechat p-3 rounded-4"></div>
+            <div class="input-group mb-3">
+                <input type="text" id="userInput" class="formatobarra form-control" placeholder="Type a message...">
+                <button class="btn btn-custom formatobarra" onclick="sendMessage()"><i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("userInput").value;
+            if (userInput.trim() === "") return;  // Evitar enviar mensajes vacíos
+
+            addMessage(userInput, "user");
+
+            // Enviar mensaje al servidor para procesarlo con Prolog
+            $.ajax({
+                url: 'backend.php',
+                type: 'POST',
+                data: { userInput: userInput },
+                success: function (response) {
+                    console.log(response);  // Verificar la respuesta en la consola
+                    addMessage(response, "bot");
+                    scrollChatToBottom();  // Desplazar hacia abajo después de agregar un mensaje
+                }
+            });
+
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
+        }
+
+        function addMessage(message, sender) {
+            var chatlogs = document.getElementById("chatlogs");
+            var newMessage = document.createElement("div");
+            newMessage.className = "message " + sender;
+
+            if (sender === "bot") {
+                var botImg = document.createElement("img");
+                botImg.src = "img/shin-hati-ahsoka-97.jpg"; 
+                botImg.alt = "Bot Image";
+                newMessage.appendChild(botImg);
+            }
+
+            // Agregar el mensaje de texto después de la imagen del bot
+            newMessage.innerHTML += message;
+
+            chatlogs.appendChild(newMessage);
+            scrollChatToBottom();
+        }
+
+        function scrollChatToBottom() {
+            var chatlogs = document.getElementById("chatlogs");
+            chatlogs.scrollTop = chatlogs.scrollHeight;
+        }
+
+    </script>
+</body>
+
+</html>
+
+

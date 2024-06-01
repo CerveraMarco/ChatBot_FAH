@@ -1,0 +1,97 @@
+body {
+    background-color: #201e19;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Un valor alto para asegurarse de que esté por encima de todo */
+    background-color: #333; /* Cambia esto al color deseado para tu navbar */
+}
+
+.chat{
+    margin-top: 80px;
+    max-width: 1400px;
+    max-height: 550px;
+    overflow-y: auto;
+}
+#chatbox {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */    
+    margin: 50px auto;
+    padding: 15px;
+    background: #201e19;
+    border-radius: 30px;
+    box-shadow: 0 0 50px rgba(36, 36, 36, 0.1);
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    max-width: 80%;
+}
+
+.user {
+    background-color: #ff9900;
+    color: #201e19;
+    text-align: right;
+    float: right;
+    clear: both;
+}
+
+.bot {
+    background-color: #201e19;
+    color: #ffffff;
+    text-align: left;   
+    float: left;
+    clear: both;
+}
+
+.message img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 50%;
+
+}
+
+#chatlogs {
+    background-color: #201e19;
+    width: 880px;
+    max-height: 450px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+}
+
+.btn-custom{
+    background-color: #ff9900 !important;
+}
+.bloquechat{
+    background-color: #161515;
+}
+.formatobarra{
+    border-radius: 50px;
+}
+
+.bot img {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 10px;
+}
+.textochat{
+    color: #ff9900;
+}
